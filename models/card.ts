@@ -37,7 +37,7 @@ const CardModelInit = (sequelize: Sequelize) => {
       },
       fullName: DataTypes.STRING,
       cardNum: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         validate: {
           isInt: true,
           min: 1000000000000000,

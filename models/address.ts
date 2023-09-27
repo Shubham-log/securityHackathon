@@ -42,7 +42,7 @@ const AddressModelInit = (sequelize: Sequelize) => {
         type: DataTypes.STRING
       },
       mobileNum: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         validate: {
           isInt: true,
           min: 1000000,

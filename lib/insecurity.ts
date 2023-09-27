@@ -176,7 +176,9 @@ export const isDeluxe = (req: Request) => {
 }
 
 export const isCustomer = (req: Request) => {
+  console.log(req)
   const decodedToken = verify(utils.jwtFrom(req)) && decode(utils.jwtFrom(req))
+  console.log(decodedToken)
   return decodedToken?.data?.role === roles.customer
 }
 

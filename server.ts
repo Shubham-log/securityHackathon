@@ -678,11 +678,11 @@ const registerWebsocketEvents = require('./lib/startup/registerWebsocketEvents')
 const customizeApplication = require('./lib/startup/customizeApplication')
 
 export async function start (readyCallback: any) {
-  const datacreatorEnd = startupGauge.startTimer({ task: 'datacreator' })
-  await sequelize.sync({ force: true })
-  await datacreator()
-  datacreatorEnd()
-  const port = process.env.PORT ?? config.get('server.port')
+  // const datacreatorEnd = startupGauge.startTimer({ task: 'datacreator' })
+  // await sequelize.sync({ force: true })
+  // await datacreator()
+  // datacreatorEnd()
+  const port = 3001
   process.env.BASE_PATH = process.env.BASE_PATH ?? config.get('server.basePath')
 
   metricsUpdateLoop = Metrics.updateLoop() // vuln-code-snippet neutral-line exposedMetricsChallenge

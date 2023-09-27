@@ -28,15 +28,17 @@ import { WalletModelInit } from './wallet'
 
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('database', 'username', 'password', {
-  dialect: 'sqlite',
+const sequelize = new Sequelize('hackathon_test', 'shubham', 'shubham123', {
+  dialect: 'mysql',
   retry: {
     match: [/SQLITE_BUSY/],
     name: 'query',
     max: 5
   },
-  transactionType: 'IMMEDIATE',
-  storage: 'data/juiceshop.sqlite',
+  username: 'shubham',
+  password: 'shubham123',
+  host: '127.0.0.1',
+  port: '3306',
   logging: false
 })
 AddressModelInit(sequelize)

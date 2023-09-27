@@ -13,6 +13,7 @@ const challenges = cache.challenges
 
 module.exports = function changePassword () {
   return ({ query, headers, connection }: Request, res: Response, next: NextFunction) => {
+    console.log(query)
     const currentPassword = query.current
     const newPassword = query.new
     const newPasswordInString = newPassword?.toString()
