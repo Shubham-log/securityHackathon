@@ -44,10 +44,10 @@ module.exports = function searchProducts () {
         }
         if (challengeUtils.notSolved(challenges.dbSchemaChallenge)) {
           let solved = true
-          models.sequelize.query('SELECT sql FROM sqlite_master').then(([data]: any) => {
+          models.sequelize.query('SHOW TABLES').then(([data]: any) => {
             const tableDefinitions = utils.queryResultToJson(data)
             if (tableDefinitions.data?.length) {
-              for (let i = 0; i < tableDefinitions.data.length; i++) {
+              for (let i = 0; i <  tableDefinitions.data.length; i++) {
                 if (tableDefinitions.data[i].sql) {
                   solved = solved && utils.containsOrEscaped(dataString, tableDefinitions.data[i].sql)
                   if (!solved) {

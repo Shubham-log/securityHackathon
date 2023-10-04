@@ -23,6 +23,7 @@ import { SecurityAnswerModelInit } from './securityAnswer'
 import { SecurityQuestionModelInit } from './securityQuestion'
 import { UserModelInit } from './user'
 import { WalletModelInit } from './wallet'
+import { MasterUsersModelInit } from './masterUsers'
 
 /* jslint node: true */
 
@@ -62,5 +63,6 @@ UserModelInit(sequelize)
 WalletModelInit(sequelize)
 
 relationsInit(sequelize)
+MasterUsersModelInit(sequelize)
 
 export { sequelize }

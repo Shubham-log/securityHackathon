@@ -1,0 +1,10 @@
+-
+  id1: 123
+  fullName: 'Shubham'
+  email: 'demo@gmail'
+  identity: 'user1'
+-
+  id1: 456
+  fullName: 'ncc-1701'
+  email: jim@gmail.com
+  identity: 'user2'

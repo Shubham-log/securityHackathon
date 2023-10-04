@@ -137,3 +137,11 @@ export interface Captcha extends Model {
   captcha: string
   answer: string
 }
+
+export interface masterUsers extends Model {
+  id1: number
+  fullName: string
+  email: number
+  identity: string
+  challengeSolved: JSON
+}

@@ -20,7 +20,8 @@ import { SecurityAnswerModel } from '../models/securityAnswer'
 import { SecurityQuestionModel } from '../models/securityQuestion'
 import { UserModel } from '../models/user'
 import { WalletModel } from '../models/wallet'
-import { type Address, type Card, type Challenge, type Delivery, type Memory, type Product, type SecurityQuestion, type User } from './types'
+import { MasterUsersModel } from '../models/masterUsers'
+import { type Address, type Card, type Challenge, type Delivery, type Memory, type Product, type SecurityQuestion, type User, type masterUsers } from './types'
 import logger from '../lib/logger'
 import config from 'config'
 import path from 'path'
@@ -60,7 +61,8 @@ module.exports = async () => {
     createQuantity,
     createWallet,
     createDeliveryMethods,
-    createMemories
+    createMemories,
+    createMasterUsers
   ]
 
   for (const creator of creators) {
@@ -704,5 +706,19 @@ async function createOrders () {
         logger.error(`Could not insert Order ${orderId}: ${utils.getErrorMessage(err)}`)
       })
     )
+  )
+}
+
+async function createMasterUsers () {
+  const userlist = await loadStaticData('masterUser')
+
+  await Promise.all(
+    userlist.map(async ({ id1, fullName, email, identity, challengeSolved }: masterUsers) => {
+      try {
+        await MasterUsersModel.create({ id1, fullName, email, identity, challengeSolved })
+      } catch (err) {
+        logger.error(`Could not insert SecurityQuestion ${email}: ${utils.getErrorMessage(err)}`)
+      }
+    })
   )
 }
