@@ -5,9 +5,10 @@
 
 import models = require('../models/index')
 import { type Request, type Response, type NextFunction } from 'express'
-import { type User } from '../data/types'
+import { masterUsers, type User } from '../data/types'
 import { BasketModel } from '../models/basket'
 import { UserModel } from '../models/user'
+import { MasterUsersModel } from '../models/masterUsers'
 import challengeUtils = require('../lib/challengeUtils')
 import config from 'config'
 
@@ -17,7 +18,7 @@ const challenges = require('../data/datacache').challenges
 const users = require('../data/datacache').users
 
 // vuln-code-snippet start loginAdminChallenge loginBenderChallenge loginJimChallenge
-module.exports = function login () {
+module.exports.login = function () {
   function afterLogin (user: { data: User, bid: number }, res: Response, next: NextFunction) {
     verifyPostLoginChallenges(user) // vuln-code-snippet hide-line
     BasketModel.findOrCreate({ where: { UserId: user.data.id } })
@@ -84,5 +85,33 @@ module.exports = function login () {
         throw new Error('Unable to verify challenges! Try again')
       })
     }
+  }
+}
+
+module.exports.masterIdentity = function (req: Request, res: Response, next: NextFunction) {
+  const id = req.query.id as string
+  if (!id || id === null || id === undefined) {
+    res.status(400).json({
+      status: 'success',
+      message: 'please provide a valid identity'
+    })
+  } else {
+    models.sequelize.query(`SELECT * FROM masterUsers WHERE fullName ='${id}'`, { model: MasterUsersModel, plain: true })
+      .then((value: { data: masterUsers }) => {
+        const user = utils.queryResultToJson(value)
+        console.log(user)
+        if (user === null) {
+          res.send(400).json({
+            status: 'success',
+            message: 'please provide a valid identity or contact the administrator'
+          })
+        }
+        res.status(200).json({
+          status: 'success',
+          identity: user.data.identity
+        })
+      }).catch((err: Error) => {
+        console.log(err)
+      })
   }
 }

