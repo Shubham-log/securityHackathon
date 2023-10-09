@@ -19,7 +19,7 @@ import { SocketIoService } from '../Services/socket-io.service'
 export class DeluxeUserComponent implements OnInit {
   public membershipCost: number = 0
   public error: string = undefined
-  public applicationName = 'OWASP Juice Shop'
+  public applicationName = 'BASH'
   public logoSrc: string = 'assets/public/images/JuiceShop_Logo.png'
 
   constructor (private readonly router: Router, private readonly userService: UserService, private readonly cookieService: CookieService, private readonly configurationService: ConfigurationService, private readonly route: ActivatedRoute, private readonly ngZone: NgZone, private readonly io: SocketIoService) {

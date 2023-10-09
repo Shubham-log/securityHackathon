@@ -24,7 +24,7 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit {
-  public applicationName = 'OWASP Juice Shop'
+  public applicationName = 'BASH'
   public showGitHubLink = true
   public userEmail = ''
   public scoreBoardVisible: boolean = false
